@@ -250,6 +250,52 @@ Occasionally, the docker image itself may receive some updates. In these cases, 
 docker compose build --no-cache
 ```
 
+<!-- Login Details -->
+## Login Details
+
+Multiple default accounts are provided, as detailed below. Each account is afforded a different set of permissions, so users can see the InvenTree roles/permission system in action
+
+| Username	    | Password      | Descriptions    |
+| ------------- | ------------- | -------- |
+| allaccess     | nolimits      | View / create / edit all pages and items  |
+| reader        | readonly      |Can view all pages but cannot create, edit or delete database records  |
+| engineer      | partsonly     | Can manage parts, view stock, but no access to purchase orders or sales orders |
+| admin         | inventree     | Can manage parts, view stock, but no access to purchase orders or sales orders  |
+
+<!-- Feature Analysis -->
+## :star2: Feature Analysis
+***Parts***
+
+The Part is the core element of the InvenTree ecosystem. A Part object is the archetype of any stock item in the inventory. Each Part defined in the database provides a number of different attributes which determine how that part can be used. The main part view is divided into 4 different panels, those are categories, details, tabs, and content of each tab.
+
+***Stock***
+
+In the stock session, we can monitor the stock item, stock location, and stock status. 
+1. Stock item is an actual instance of a Part item. It represents a physical quantity of the Part in a specific location
+2. Stock location represents a physical real-world location where Stock Items are stored
+3. Stock status is used to see current condition of the individual stock item whether its 'ok', 'need attention', 'destroyed', 'lost', and etc.
+
+***Build Orders***
+
+A Build Order from section _build_ is used to create new stock by assembling component parts, according to a Bill of Materials (BOM). A BOM can be specified for any Part which is designated as an Assembly. The BOM consists of other Parts which are designated as Components.
+
+A Build Order uses the BOM to allocate stock items to the assembly process. As the Build Order is completed, the required stock quantities are subtracted from allocated stock items.
+
+***Orders***
+
+Orders are divided as purchase orders, sales orders, and return orders. 
+
+**Purchase Orders**
+Purchase orders allow to track which parts are bought from suppliers and manufacturers, therefore converting externally bought items into stock items / inventory.
+
+**Sales Orders**
+Sales orders allow tracking of which stock items are sold to customers, therefore converting stock items or inventory into externally sold items. 
+
+**Return Orders**
+Return Orders allow stock items (which have been sold or allocated to a customer) to be to be returned into stock, typically for the purpose of repair or refund.
+
+*Each of Purchase Orders, Sales Orders, and Return Orders has a specific status code, which represents the state of the order, there are _Pending_, _In Progress_, _Shipped_, _Cancelled_.*
+
 <!-- Acknowledgments -->
 ## :gem: Acknowledgements
 
