@@ -97,26 +97,6 @@ InvenTree is designed to be **extensible**, and provides multiple options for **
   </ul>
 </details>
 
-<!-- Getting Started -->
-## 	:toolbox: Deployment / Getting Started
-
-There are several options to deploy InvenTree.
-
-<div align="center"><h4>
-    <a href="https://docs.inventree.org/en/latest/start/docker/">Docker</a>
-    <span> · </span>
-    <a href="https://inventree.org/digitalocean"><img src="https://www.deploytodo.com/do-btn-blue-ghost.svg" alt="Deploy to DO" width="auto" height="40" /></a>
-    <span> · </span>
-    <a href="https://docs.inventree.org/en/latest/start/install/">Bare Metal</a>
-</h4></div>
-
-Single line install - read [the docs](https://docs.inventree.org/en/latest/start/installer/) for supported distros and details about the function:
-```bash
-wget -qO install.sh https://get.inventree.org && bash install.sh
-```
-
-Refer to the [getting started guide](https://docs.inventree.org/en/latest/start/install/) for a full set of installation and setup instructions.
-
 <!-- Docker Development Installment -->
 ## :star2: Docker Development Installment
 
