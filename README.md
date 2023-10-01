@@ -117,6 +117,137 @@ wget -qO install.sh https://get.inventree.org && bash install.sh
 
 Refer to the [getting started guide](https://docs.inventree.org/en/latest/start/install/) for a full set of installation and setup instructions.
 
+<!-- Docker Development Installment -->
+## :star2: Docker Development Installment
+
+You can use docker to launch and manage a development server, in a similar fashion to managing a production server.
+
+The InvenTree dockerfile uses a multi-stage build process to allow both production and development setups from the same image.
+
+There are some key differences compared to the docker production setup:
+
+<ul>
+  <li>The docker image is built locally, rather than being downloaded from DockerHub </li>
+  <li>The docker image points to the source code on your local machine (mounted as a 'volume' in the docker container)</li>
+  <li>The django webserver is used, instead of running behind Gunicorn</li>
+  <li>The server will automatically reload when code changes are detected</li>
+</ul>
+
+### Quickstart and Development Setup Guide
+
+To get "up and running" with a development environment, run the following commands:
+
+_git clone https://github.com/inventree/InvenTree.git && cd InvenTree
+docker compose run inventree-dev-server invoke update
+docker compose run inventree-dev-server invoke setup-test --dev
+docker compose up -d_
+
+To get started with an InvenTree development setup, follow the simple steps outlined below. Before continuing, ensure that you have completed the following steps:
+<ul>
+  <li>Downloaded the InvenTree source code to your local machine</li>
+  <li>Installed docker on your local machine (install Docker Desktop on Windows </li>
+  <li>Have a terminal open to the root directory of the InvenTree source code</li>
+</ul>
+
+#### Perform Initial Setup
+
+Perform the initial database setup by running the following command:
+
+_docker compose run inventree-dev-server invoke update --no-frontend_
+
+If this is the first time you are configuring the development server, this command will build a development version of the inventree docker image.
+
+This command also performs the following steps:
+
+<ul> 
+  <li>Ensure required python packages are installed</li>
+  <li>Perform the required schema updates to create the required database tables</li>
+  <li>Update translation files</li>
+  <li>Collect all required static files into a directory where they can be served by nginx</li>
+</ul>
+Ensure required python packages are installed
+Perform the required schema updates to create the required database tables
+Update translation files
+Collect all required static files into a directory where they can be served by nginx
+
+#### Import Demo Data
+
+To fill the database with a demo dataset, run the following command:
+
+_docker compose run inventree-dev-server invoke setup-test --dev_
+
+
+#### Start Docker Containers
+
+Now that the database has been created, and migrations applied, we are ready to launch the InvenTree containers:
+
+_docker compose up -d_
+
+#### Create Admin Account
+
+If you are creating the initial database, you need to create an admin (superuser) account for the database. Run the command below, and follow the prompts:
+
+_docker compose run inventree-dev-server invoke superuser_
+
+### Running commands in the container
+
+Using docker compose run [...] commands creates a new container to run this specific command. This will eventually clutter your docker with many dead containers that take up space on the system.
+
+You can access the running containers directly with the following:
+
+_docker exec -it inventree-dev-server /bin/bash_
+
+You then run the following to access the virtualenv:
+
+_source data/env/bin/activate_
+
+#### Cleaning up old containers
+
+If you have Docker Desktop installed, you will be able to remove containers directly in the GUI. Your active containers are grouped under "inventree" in Docker Desktop. The main dev-server, dev-db, and dev-worker containers are all listed without the "inventree" prefix. One time run containers, like those executed via docker compose run [...] are suffixed with run-1a2b3c4d5e6f where the hex string varies.
+
+To remove such containers, either click the garbage bin on the end of the line, or mark the containers, and click the delete button that shows up. This is the recommended procedure for container cleanup.
+
+### Restarting Services
+
+Once initial setup is complete, stopping and restarting the services is much simpler:
+
+**Stop InvenTree Services**
+
+To stop the InvenTree development server, simply run the following command:
+
+_docker compose down_
+
+**Start InvenTree Services**
+
+To start the InvenTree development server, simply run the following command:
+
+_docker compose up -d_
+
+**Restart InvenTree Services**
+
+A restart cycle is as simple as:
+
+_docker compose restart_
+
+### Editing InvenTree Source
+
+Any changes made to the InvenTree source code are automatically detected by the services running under docker.
+
+Thus, you can freely edit the InvenTree source files in your editor of choice.
+
+**Database Updates**
+Any updates which require a database schema change must be reflected in the database itself.
+
+To run database migrations inside the docker container, run the following command:
+
+_docker compose run inventree-dev-server invoke update --no-frontend_
+
+**Docker Image Updates**
+Occasionally, the docker image itself may receive some updates. In these cases, it may be required that the image is rebuilt. To perform a complete rebuild of the InvenTree development image from local source, run the following command:
+
+_docker compose build --no-cache_
+
+
 <!-- Acknowledgments -->
 ## :gem: Acknowledgements
 
