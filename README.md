@@ -117,32 +117,6 @@ wget -qO install.sh https://get.inventree.org && bash install.sh
 
 Refer to the [getting started guide](https://docs.inventree.org/en/latest/start/install/) for a full set of installation and setup instructions.
 
-<!-- Mobile App -->
-## 	:iphone: Mobile App
-
-InvenTree is supported by a [companion mobile app](https://docs.inventree.org/en/latest/app/app/) which allows users access to stock control information and functionality.
-
-<div align="center"><h4>
-    <a href="https://play.google.com/store/apps/details?id=inventree.inventree_app">Android Play Store</a>
-     <span> · </span>
-    <a href="https://apps.apple.com/au/app/inventree/id1581731101#?platform=iphone">Apple App Store</a>
-</h4></div>
-
-<!-- Contributing -->
-## :wave: Contributing
-
-Contributions are welcomed and encouraged. Please help to make this project even better! Refer to the [contribution page](CONTRIBUTING.md).
-
-<!-- Translation -->
-## :scroll: Translation
-
-Native language translation of the InvenTree web application is [community contributed via crowdin](https://crowdin.com/project/inventree). **Contributions are welcomed and encouraged**.
-
-<!-- Sponsor -->
-## :money_with_wings: Sponsor
-
-If you use InvenTree and find it to be useful, please consider [sponsoring the project](https://github.com/sponsors/inventree).
-
 <!-- Acknowledgments -->
 ## :gem: Acknowledgements
 
@@ -159,7 +133,6 @@ Find a full list of used third-party libraries in [our documentation](https://do
   </a>
   <a href="https://www.netlify.com"> <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /> </a>
 </p>
-
 
 <!-- License -->
 ## :warning: License
